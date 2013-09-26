@@ -1,0 +1,42 @@
+body
+{
+	margin: 0 auto 0 auto;
+}
+
+body *
+{
+	font-family: Arial, Sans-Serif;
+	font-size: 14px;
+}
+
+h1, h2 ,h3
+{
+	color: #004c60;
+}
+
+h1{ font-size: 32px; }
+h2{ font-size: 22px; }
+h3{ font-size: 18px; }
+
+a{ color: #00576d; text-decoration: none; }
+a:hover{ color: #e88c00; }
+
+img{ border: 0 }
+
+table
+{
+	width: 100%;
+}
+
+table, td
+{
+	border: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+	padding: 0;
+}
+
+#reports_footer
+{
+	text-align: center;
+}

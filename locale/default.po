@@ -1,0 +1,202 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CMS\n"
+"POT-Creation-Date: 2013-09-26 17:36-0400\n"
+"PO-Revision-Date: 2013-09-26 17:36-0400\n"
+"Last-Translator: Jefferson González <jgonzalez@jegoyalu.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: t\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: lib\n"
+
+#: lib/cms/system.php:312
+msgid "You have to set the data source before getting the database."
+msgstr ""
+
+#: lib/cms/system.php:422
+msgid "You can not use this function without initializing the System class."
+msgstr ""
+
+#: lib/cms/form.php:308
+msgid "Please provide the {field} field."
+msgstr ""
+
+#: lib/cms/form.php:353
+msgid "The lenght of {field} exceeds the maximum allowed of {size}."
+msgstr ""
+
+#: lib/cms/form.php:371
+msgid ""
+"{field} is read only and you injected a different value than its original."
+msgstr ""
+
+#: lib/cms/theme.php:334
+msgid "error:"
+msgstr ""
+
+#: lib/cms/language.php:45
+msgid "Languages directory not found."
+msgstr ""
+
+#: lib/cms/utilities.php:48
+msgid "0 seconds"
+msgstr ""
+
+#: lib/cms/utilities.php:52
+msgid "year"
+msgstr ""
+
+#: lib/cms/utilities.php:52
+msgid "years"
+msgstr ""
+
+#: lib/cms/utilities.php:53
+msgid "month"
+msgstr ""
+
+#: lib/cms/utilities.php:53
+msgid "months"
+msgstr ""
+
+#: lib/cms/utilities.php:54
+msgid "day"
+msgstr ""
+
+#: lib/cms/utilities.php:54
+msgid "days"
+msgstr ""
+
+#: lib/cms/utilities.php:55
+msgid "hour"
+msgstr ""
+
+#: lib/cms/utilities.php:55
+msgid "hours"
+msgstr ""
+
+#: lib/cms/utilities.php:56
+msgid "minute"
+msgstr ""
+
+#: lib/cms/utilities.php:56
+msgid "minutes"
+msgstr ""
+
+#: lib/cms/utilities.php:57
+msgid "second"
+msgstr ""
+
+#: lib/cms/utilities.php:57
+msgid "seconds"
+msgstr ""
+
+#: lib/cms/utilities.php:72
+msgid "{time} {period} ago"
+msgstr ""
+
+#: lib/cms/authentication.php:45 lib/cms/authentication.php:60
+#: lib/cms/authentication.php:106
+msgid "The username or password you entered is incorrect."
+msgstr ""
+
+#: lib/cms/authentication.php:78
+msgid ""
+"Your registration is awaiting for approval. If the registration is approved "
+"you will receive an email notification."
+msgstr ""
+
+#: lib/cms/pages.php:39
+msgid "Page not found"
+msgstr ""
+
+#: lib/cms/pages.php:40
+msgid "The page you are visiting does not exists."
+msgstr ""
+
+#: lib/cms/dbal/datasource.php:49
+msgid "Data source hasn't been initialized."
+msgstr ""
+
+#: lib/cms/dbal/database.php:83
+msgid "Invalid data source."
+msgstr ""
+
+#: lib/cms/dbal/database.php:209
+msgid "No connection establised to carry out this operation."
+msgstr ""
+
+#: lib/cms/dbal/query/select.php:37 lib/cms/dbal/query/select.php:57
+msgid "All columns already selected."
+msgstr ""
+
+#: lib/cms/dbal/query/select.php:47
+msgid "Select all not allowed if columns where previously selected."
+msgstr ""
+
+#: lib/cms/dbal/query/update.php:122
+msgid "The column was already assigned."
+msgstr ""
+
+#: lib/cms/dbal/query/table.php:57
+msgid "Field is not defined."
+msgstr ""
+
+#: lib/cms/permissions/userpermissions.php:20
+msgid "Users"
+msgstr ""
+
+#: lib/cms/permissions/userpermissions.php:24
+#: lib/cms/permissions/grouppermissions.php:24
+msgid "View"
+msgstr ""
+
+#: lib/cms/permissions/userpermissions.php:25
+msgid "View all available user accounts from the users administrative page."
+msgstr ""
+
+#: lib/cms/permissions/userpermissions.php:30
+#: lib/cms/permissions/grouppermissions.php:30
+msgid "Create"
+msgstr ""
+
+#: lib/cms/permissions/userpermissions.php:31
+#: lib/cms/permissions/grouppermissions.php:31
+msgid "Add new user accounts."
+msgstr ""
+
+#: lib/cms/permissions/userpermissions.php:36
+#: lib/cms/permissions/grouppermissions.php:36
+msgid "Edit"
+msgstr ""
+
+#: lib/cms/permissions/userpermissions.php:37
+#: lib/cms/permissions/grouppermissions.php:37
+msgid "Modify existing user accounts."
+msgstr ""
+
+#: lib/cms/permissions/userpermissions.php:42
+#: lib/cms/permissions/grouppermissions.php:42
+msgid "Delete"
+msgstr ""
+
+#: lib/cms/permissions/userpermissions.php:43
+#: lib/cms/permissions/grouppermissions.php:43
+msgid "Delete existing user accounts."
+msgstr ""
+
+#: lib/cms/permissions/grouppermissions.php:20
+msgid "Groups"
+msgstr ""
+
+#: lib/cms/permissions/grouppermissions.php:25
+msgid "View all available groups from the groups administrative page."
+msgstr ""
+
+#: lib/cms/form/textfield.php:77 lib/cms/form/textfield.php:133
+msgid "characters left"
+msgstr ""
