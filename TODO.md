@@ -8,7 +8,7 @@ include:
 * Cms\Groups
 * Cms\Session
 
-## Example
+### Example
 
 Currently to login into the system we have to execute:
 
@@ -25,3 +25,7 @@ stored on:
     Cms\Handlers\Authentication
     
 If no handler is explicitly set the default is used.
+
+# Use Flock
+
+Make use of flock on the Cms\Data class instead of creating a lock file.
