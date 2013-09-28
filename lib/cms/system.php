@@ -433,7 +433,7 @@ class System
                 ->AddTextField('picture')
                 ->AddTextField('ip')
                 ->AddTextField('gender')
-                ->AddTextField('birth_date')
+                ->AddIntegerField('birth_date')
                 ->AddTextField('status')
                 ->AddPrimaryKey('username')
             ;

@@ -81,8 +81,6 @@ class Pages
         if(file_exists($system_page_uri))
             return $system_page_uri;
         
-        Theme::AddMessage($system_page_uri);
-        
         $uri = str_replace('/', '-', $uri);
 
         return System::GetDataPath() . 'pages/' . Uri::TextToUri($uri) . '.php';

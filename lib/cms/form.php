@@ -410,6 +410,9 @@ class Form extends Signals\Signal
                     $errors = true;
 
                     $validation_errors[$field->GetRealName()] = $field->validator->errors;
+                    
+                    if($field->validator->error_message)
+                        Theme::AddMessage($field->validator->error_message);
                 }
             }
 
