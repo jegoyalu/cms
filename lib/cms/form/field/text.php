@@ -12,9 +12,15 @@ use Cms\Enumerations\FormFieldType;
 
 class Text extends Field
 {
-    public function __construct($label, $name, $value='', $description='', $placeholder='', $required=false, $readonly=false, $size=0)
+    public function __construct(
+        $label, $name, $value='', $description='', $placeholder='', 
+        $required=false, $readonly=false, $size=0
+    )
     {
-        parent::__construct($label, $name, $value, $description, $placeholder, FormFieldType::TEXT, $required, $readonly, $size);
+        parent::__construct(
+            $label, $name, $value, $description, $placeholder, 
+            FormFieldType::TEXT, $required, $readonly, $size
+        );
     }
     
     public function GetHtml()
@@ -99,7 +105,7 @@ class Text extends Field
         {
             $request_value = $this->GetRequestValue();
             
-            if($request_value)
+            if(trim($request_value) != '')
                 $html .= $this->GetSingleHtml($request_value);
             else
                 $html .= $this->GetSingleHtml($this->value);

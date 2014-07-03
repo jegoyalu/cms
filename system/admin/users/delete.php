@@ -15,7 +15,7 @@ row: 0
     <?php
         Cms\Authentication::ProtectPage(Cms\Enumerations\Permissions\Users::DELETE);
 
-        \Cms\Theme::AddTab(t('Edit'), 'account/profile', array(
+        Cms\Theme::AddTab(t('Edit'), 'account/profile', array(
             'username'=>$_REQUEST['username']
         ));
         
@@ -51,12 +51,13 @@ row: 0
         });
         
         $html = '<div class="cmsgui">' .
+            '<div class="admin-users-delete">' .
             '<p>' .
             t('This action will also delete all users content.') . ' ' . 
             t('Are you sure you want to delete the user?') .
             '</p>' .
             '<div><strong>'.t("Username:").' '.$_REQUEST["username"].'</strong></div>' .
-            '</div>' . "\n"
+            '</div></div>' . "\n"
         ;
         
         $form->AddField(new Cms\Form\Field\Custom($html));

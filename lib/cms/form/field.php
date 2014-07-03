@@ -9,6 +9,9 @@ namespace Cms\Form;
 
 use Cms\Enumerations\FormFieldType;
 
+/**
+ * Represents a form field.
+ */
 class Field
 {
     /**
@@ -90,7 +93,10 @@ class Field
      * @param int $size
      * @return \Cms\Form\Field
      */
-    public function __construct($label, $name, $value='', $description='', $placeholder='', $type=FormFieldType::TEXT, $required=false, $readonly=false, $size=0)
+    public function __construct(
+        $label, $name, $value='', $description='', $placeholder='', 
+        $type=FormFieldType::TEXT, $required=false, $readonly=false, $size=0
+    )
     {
         $this->attributes = array();
         
@@ -296,7 +302,7 @@ class Field
             {
                 foreach($request_value as $value)
                 {
-                    if(trim($value) != "")
+                    if(trim($value))
                     {
                         $this->id .= '-' . $id;
                         $html .= '<div class="field">' . "\n";
@@ -373,7 +379,7 @@ class Field
         $html .= 'id="'.$this->id.'" ';
         $html .= 'name="'.$this->name.'" ';
 
-        if($value)
+        if(trim($value) != '')
             $html .= 'value="'.$value.'" ';
         
         if($this->placeholder)

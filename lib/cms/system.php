@@ -65,6 +65,8 @@ class System
             self::$session_handler = new Handlers\Session();
         }
         
+        date_default_timezone_set('UTC');
+        
         session_set_save_handler(self::$session_handler, true);
         session_start();
     }
@@ -467,6 +469,7 @@ class System
         {
             $users_table = new DBAL\Query\Table('users');
             $users_table->AddTextField('username')
+                ->AddTextField('fullname')
                 ->AddTextField('email')
                 ->AddIntegerField('register_date')
                 ->AddTextField('user_group') //group is a reserved sql word
@@ -517,10 +520,22 @@ namespace
     function t($text)
     {
         static $language_object;
+        
+        if(isset($_REQUEST['language']))
+            $_SESSION['language'] = $_REQUEST['language'];
 
         if(!$language_object)
         {
             $language_object = new Cms\Language(Cms\System::GetTranslationsPath());
+            
+            if(isset($_SESSION['language']))
+                $language_object->SetLanguage($_SESSION['language']);
+            
+            elseif(trim(Cms\Authentication::GetUser()->language) != '')
+                $language_object->SetLanguage(Cms\Authentication::GetUser()->language);
+            
+            else
+                $language_object->SetLanguageAsBrowser();
         }
 
         return $language_object->Translate($text);

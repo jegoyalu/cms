@@ -35,46 +35,6 @@ class Utilities
     }
     
     /**
-     * Get the amount of time in a easy to read human format.
-     * @param int $timestamp
-     * @return string
-     */
-    public static function GetTimeElapsed($timestamp)
-    {
-        $etime = time() - $timestamp;
-
-        if ($etime < 1)
-        {
-            return t('0 seconds');
-        }
-
-        $a = array(
-            12 * 30 * 24 * 60 * 60 => array(t('year'), t('years')),
-            30 * 24 * 60 * 60 => array(t('month'), t('months')),
-            24 * 60 * 60 => array(t('day'), t('days')),
-            60 * 60 => array(t('hour'), t('hours')),
-            60 => array(t('minute'), t('minutes')),
-            1 => array(t('second'), t('seconds'))
-        );
-
-        foreach ($a as $secs => $labels)
-        {
-            $d = $etime / $secs;
-            if ($d >= 1)
-            {
-                $time = round($d);
-
-                if($time > 1)
-                    $period = $labels[1];
-                else
-                    $period = $labels[0];
-
-                return str_replace(array('{time}', '{period}'), array($time, $period), t('{time} {period} ago'));
-            }
-        }
-    }
-    
-    /**
      * Generates a generic navigation bar for any kind of results
      * 
      * @param integer $total_count The total amount of results.
@@ -84,13 +44,12 @@ class Utilities
      * @param integer $amount Optional amount of results to display per page, Default: 30
      * @param array $arguments Optional arguments to pass to the navigation links.
      */
-    function GenerateNavigation($total_count, $page, $uri, $module = "", $amount = 30, $arguments = array())
+    public static function GenerateNavigation($total_count, $page, $uri, $module = "", $amount = 30, $arguments = array())
     {
         $html = '';
         
         $page_count = 0;
         $remainder_pages = 0;
-        $arguments = array();
 
         if($total_count <= $amount)
         {
@@ -113,8 +72,8 @@ class Utilities
             return '';
         }
 
-        $html .= '<div class="search-results">' . "\n";
-        $html .= "\t" . '<div class="navigation">' . "\n";
+        $html .= '<div class="pages-navigation">' . "\n";
+        $html .= "\t" . '<div class="pages">' . "\n";
         
         if($page != 1)
         {

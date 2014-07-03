@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @author Jefferson González
  * @license MIT
@@ -238,8 +237,17 @@ class Groups {
 
         $permissions = array();
         
-        $permissions[] = new Permissions\UserPermissions;
-        $permissions[] = new Permissions\GroupPermissions;
+        $permissions[] = new Permissions\User;
+        $permissions[] = new Permissions\Group;
+        
+        //Send signal
+        $signal_data = new Signals\SignalData();
+        $signal_data->Add('permissions', $permissions);
+        
+        Signals\SignalHandler::Send(
+            Enumerations\Signals\Group::GET_PERMISSIONS, 
+            $signal_data
+        );
         
         if($group_name == 'administrator')
         {

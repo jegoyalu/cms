@@ -22,15 +22,21 @@ class CheckBox extends Field
      * @param string $main_label
      * @param string $name
      * @param array $options
-     * @param string $selected
+     * @param string|array $selected
      * @param string $description
      * @param boolean $required
      * @param boolean $readonly
      * @param int $size
      */
-    public function __construct($main_label, $name, array $options=array(), $selected='', $description='', $required=false, $readonly=false, $size=0)
+    public function __construct(
+        $main_label, $name, array $options=array(), $selected='', 
+        $description='', $required=false, $readonly=false, $size=0
+    )
     {
-        parent::__construct($main_label, $name, $selected, $description, null, FormFieldType::CHECKBOX, $required, $readonly, $size);
+        parent::__construct(
+            $main_label, $name, $selected, $description, null, 
+            FormFieldType::CHECKBOX, $required, $readonly, $size
+        );
         
         $this->options = $options;
     }

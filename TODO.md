@@ -29,3 +29,8 @@ If no handler is explicitly set the default is used.
 # Use Flock
 
 Make use of flock on the Cms\Data class instead of creating a lock file.
+
+# CSS
+
+Automatically generate a cmsgui class for system pages and a cms module
+class for pages that belong to a module.

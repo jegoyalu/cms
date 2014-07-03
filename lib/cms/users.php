@@ -25,6 +25,8 @@ class Users
      */
     public static function Add(\Cms\Data\User $user)
     {
+        $user->username = strtolower($user->username);
+        
         $path = self::GetPath($user->username, $user->group);
 
         if(file_exists($path))
@@ -32,7 +34,17 @@ class Users
 
         FileSystem::MakeDir($path, 0755, true);
         
+        $signal_data = new Signals\SignalData;
+        $signal_data->Add('user', $user);
+
+        Signals\SignalHandler::Send(
+            Enumerations\Signals\User::ADD, $signal_data
+        );
+        
         $user->password = crypt($user->password);
+        
+        if(!$user->registration_date)
+            $user->registration_date = time();
 
         $user_data = new Data($path . 'data.php');
         $user_data->AddRow($user);
@@ -43,6 +55,7 @@ class Users
         {
             $insert = new DBAL\Query\Insert('users');
             $insert->Insert('username', $user->username, Enumerations\FieldType::TEXT)
+                ->Insert('fullname', $user->fullname, Enumerations\FieldType::TEXT)
                 ->Insert('email', $user->email, Enumerations\FieldType::TEXT)
                 ->Insert('register_date', $user->registration_date, Enumerations\FieldType::INTEGER)
                 ->Insert('user_group', $user->group, Enumerations\FieldType::TEXT)
@@ -64,6 +77,8 @@ class Users
      */
     public static function Delete($username)
     {
+        $username = strtolower($username);
+        
         $user_exists = self::Exists($username);
 
         if(!is_array($user_exists))
@@ -74,20 +89,36 @@ class Users
         FileSystem::RecursiveRemoveDir($path);
 
         //Remove old data/users/group_name/X/XX if empty
-        rmdir(System::GetDataPath() . "users/{$user_exists['group']}/" . substr($username, 0, 1) . '/' . substr($username, 0, 2));
+        rmdir(
+            System::GetDataPath() . "users/{$user_exists['group']}/" . 
+            substr($username, 0, 1) . '/' . substr($username, 0, 2)
+        );
 
         //Remove old data/users/group_name/X if empty
-        rmdir(System::GetDataPath() . "users/{$user_exists['group']}/" . substr($username, 0, 1));
+        rmdir(
+            System::GetDataPath() . "users/{$user_exists['group']}/" . 
+            substr($username, 0, 1)
+        );
         
         $db = System::GetRelationalDatabase();
         
         if($db->TableExists('users'))
         {
             $delete = new DBAL\Query\Delete('users');
-            $delete->WhereEqual('username', $username, Enumerations\FieldType::TEXT);
+            $delete->WhereEqual(
+                'username', $username, 
+                Enumerations\FieldType::TEXT
+            );
 
             $db->Delete($delete);
         }
+        
+        $signal_data = new Signals\SignalData;
+        $signal_data->Add('username', $username);
+        
+        Signals\SignalHandler::Send(
+            Enumerations\Signals\User::DELETE, $signal_data
+        );
     }
 
     /**
@@ -105,6 +136,14 @@ class Users
 
         if($user_exist)
         {
+            $signal_data = new Signals\SignalData;
+            $signal_data->Add('username', $username);
+            $signal_data->Add('user_data', $user_data);
+
+            Signals\SignalHandler::Send(
+                Enumerations\Signals\User::EDIT, $signal_data
+            );
+        
             $user_data_path = $user_exist['path'];
 
             $data = new Data($user_data_path . 'data.php');
@@ -137,6 +176,7 @@ class Users
             {   
                 $update = new DBAL\Query\Update('users');
                 $update->Update('email', $user_data->email, Enumerations\FieldType::TEXT)
+                    ->Update('fullname', $user_data->fullname, Enumerations\FieldType::TEXT)
                     ->Update('register_date', $user_data->registration_date, Enumerations\FieldType::INTEGER)
                     ->Update('user_group', $user_data->group, Enumerations\FieldType::TEXT)
                     ->Update('picture', $user_data->picture, Enumerations\FieldType::TEXT)
@@ -176,6 +216,14 @@ class Users
             $user_object->username = $username;
             $data->GetRow(0, $user_object);
             $user_object->group = $user_exist['group'];
+            
+            $signal_data = new Signals\SignalData;
+            $signal_data->Add('username', $username);
+            $signal_data->Add('user_data', $user_object);
+
+            Signals\SignalHandler::Send(
+                Enumerations\Signals\User::GET, $signal_data
+            );
 
             return $user_object;
         }
@@ -398,11 +446,14 @@ class Users
         }
 
         $content = '';
+        
+        if(count(Pages::GetAdminPageGroups()) > 0)
+        {
+            $tabs[t('Control Center')] = array('uri' => 'admin');
+        }
 
         if(Authentication::IsAdminLogged())
         {
-            $tabs[t('Control Center')] = array('uri' => 'admin');
-
             $content = t('Welcome Administrator!') . '<br /><br />' . 
                 t('Now that you are logged in you can start modifying the website as you need.')
             ;
